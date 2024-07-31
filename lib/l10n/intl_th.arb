@@ -1,0 +1,9 @@
+{
+  "register": "ลงทะเบียน",
+  "login": "เข้าใช้งาน",
+  "title": "เดโมฟลัตเตอร์",
+  "settings_title": "ตั้งค่า",
+  "settings_description": "การตั้งค่าแอพพลิเคชันของคุณ",
+  "profile_title": "โปรไฟล์",
+  "profile_description": "รายละเอียดของผู้ใช้"
+}
