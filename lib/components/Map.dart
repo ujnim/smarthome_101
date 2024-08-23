@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:heroicons/heroicons.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class MapComponent extends StatefulWidget {
   final void Function(LatLng, String) onNextRouted;
@@ -97,11 +98,11 @@ class _MapComponentState extends State<MapComponent> {
         localeCode: locale,
       );
 
-      const apiKey = 'AIzaSyDGy_OQcftOsfgt3VAFEws4EPpVZNe7BYM';
+      // const apiKey = dotenv.env['GOOGLE_API_KEY'];
       final url = Uri.parse(
         'https://maps.googleapis.com/maps/api/geocode/json'
         '?latlng=${newPosition.latitude},${newPosition.longitude}'
-        '&key=$apiKey'
+        '&key=${dotenv.env['GOOGLE_API_KEY']}'
         '&language=$locale',
       );
 
