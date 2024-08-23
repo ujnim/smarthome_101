@@ -45,12 +45,5 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-	<key>GMSApiKey</key>
-	<string>AIzaSyDGy_OQcftOsfgt3VAFEws4EPpVZNe7BYM</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need your location to provide better services</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We need your location to provide better services</string>
-
 </dict>
 </plist>

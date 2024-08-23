@@ -35,9 +35,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
-  dropdown_button2: ^2.3.8
   http: ^0.13.6
-  intl: ^0.19.0
   google_fonts: ^4.0.4
   flutter_localizations:
     sdk: flutter
@@ -45,21 +43,7 @@ dependencies:
   firebase_core: ^3.2.0
   firebase_auth: ^5.1.2
   cloud_firestore: ^5.1.0
-  geocoding: ^3.0.0
-  google_maps_flutter: ^2.7.0
-  geolocator: ^12.0.0
-  permission_handler: ^10.2.0
-  dotted_border: ^2.1.0
-  flutter_dotenv: ^5.1.0
-  flutter_svg: ^2.0.9
-  image_picker: ^1.1.2
-  flutter_cupertino_date_picker_fork: ^1.0.7
-  qr_flutter: ^4.1.0
-  el_tooltip: ^2.0.0
-  pretty_qr_code: ^3.3.0
-  flutter_html: ^3.0.0-beta.2
-  provider: ^6.1.2
-  shared_preferences: ^2.3.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -85,10 +69,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/logo/Smart_Living+_Logo_01.jpg
-    - assets/images/logo/LINE_Brand_icon.png
-    - assets/data/
-    - .env
-    - lib/l10n/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -7,8 +7,6 @@ import 'package:smart_home101/pages/auth/register.dart';
 import 'package:smart_home101/components/BottomSheet.dart';
 import 'package:smart_home101/components/Button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:smart_home101/providers/user_profile_provider.dart';
-import 'package:provider/provider.dart';
 
 class FormLogin extends StatefulWidget {
   const FormLogin({super.key});
@@ -37,13 +35,6 @@ class _FormLogin extends State<FormLogin> {
     if (response.statusCode == 200) {
       final jsonResponse = jsonDecode(response.body);
       _showSnackbar(jsonResponse['message']);
-
-      final userId =
-          jsonResponse['userId']; // ปรับให้ตรงกับข้อมูลที่ส่งกลับจาก API
-      await Provider.of<UserProfileProvider>(context, listen: false)
-          .fetchUserProfile(userId);
-
-      Navigator.pushReplacementNamed(context, '/home');
     }
   }
 

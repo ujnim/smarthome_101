@@ -1,115 +1,71 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:smart_home101/Components/Button.dart';
+import 'package:smart_home101/components/Font.dart';
 import 'package:smart_home101/components/ListMenu.dart';
 import 'package:smart_home101/components/Navbar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:heroicons/heroicons.dart';
-import 'package:smart_home101/pages/home/list.dart';
-import 'package:smart_home101/pages/legals/about.dart';
-import 'package:smart_home101/pages/legals/policies.dart';
-import 'package:smart_home101/pages/legals/report.dart';
-import 'package:smart_home101/pages/legals/terms.dart';
-import 'package:smart_home101/pages/profile/detail.dart';
-import 'package:smart_home101/pages/profile/qrcode.dart';
-import 'package:smart_home101/pages/settings/language.dart';
-import 'package:smart_home101/providers/user_profile_provider.dart';
-import 'package:provider/provider.dart';
 
-class SettingsScreen extends StatefulWidget {
+const List<Map<String, dynamic>> menuItems = [
+  {
+    'icon': HeroIcons.home,
+    'menuName': 'จัดการบ้านและสมาชิก',
+  },
+  {
+    'icon': HeroIcons.language,
+    'menuName': 'ภาษา',
+    'description': 'ภาษาไทย',
+    'title': 'การตั้งค่า',
+    'space': true,
+    'border': true,
+  },
+  {
+    'icon': HeroIcons.bellAlert,
+    'menuName': 'การแจ้งเตือน',
+  },
+  {
+    'icon': HeroIcons.document,
+    'menuName': 'ข้อกำหนดและเงื่อนไขการให้บริการ',
+    'title': 'ข้อกำหนดและนโยบาย',
+    'space': true,
+    'border': true,
+  },
+  {
+    'icon': HeroIcons.documentText,
+    'menuName': 'นโยบายการคุ้มครองข้อมูลส่วนบุคคล',
+  },
+  {
+    'icon': HeroIcons.deviceTablet,
+    'menuName': 'เกี่ยวกับแอปพลิเคชัน',
+    'title': 'แอปพลิเคชัน',
+    'space': true,
+  },
+  {
+    'icon': HeroIcons.chatBubbleBottomCenterText,
+    'menuName': 'แจ้งปัญหา และขอความช่วยเหลือ',
+    'title': 'ความช่วยเหลือ',
+    'space': true,
+  },
+];
+
+class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
-  _SettingsScreenState createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  @override
-  void initState() {
-    super.initState();
-    _loadUserProfile();
-  }
-
-  Future<void> _loadUserProfile() async {
-    final userProfileProvider =
-        Provider.of<UserProfileProvider>(context, listen: false);
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      await userProfileProvider.fetchUserProfile(user.uid);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final userProfile = Provider.of<UserProfileProvider>(context).userProfile;
-    final List<Map<String, dynamic>> menuItems = [
-      {
-        'icon': HeroIcons.home,
-        'menuName': AppLocalizations.of(context)!.settingsHomeManagement,
-        'link': const HomeListScreen()
-      },
-      {
-        'icon': HeroIcons.language,
-        'menuName': AppLocalizations.of(context)!.settingsLanguage,
-        'description': AppLocalizations.of(context)!.settingsLanguageCurrent,
-        'title': AppLocalizations.of(context)!.settings,
-        'space': true,
-        'border': true,
-        'link': const LanguageScreen()
-      },
-      {
-        'icon': HeroIcons.bellAlert,
-        'menuName': AppLocalizations.of(context)!.settingsNotifications,
-      },
-      {
-        'icon': HeroIcons.document,
-        'menuName':
-            AppLocalizations.of(context)!.settingsTermsAndConditionsOfService,
-        'title': AppLocalizations.of(context)!.settingsTermsAndPolicies,
-        'space': true,
-        'border': true,
-        'link': const TermsScreen()
-      },
-      {
-        'icon': HeroIcons.documentText,
-        'menuName': AppLocalizations.of(context)!.settingsPrivacyPolicy,
-        'link': const PoliciesScreen()
-      },
-      {
-        'icon': HeroIcons.deviceTablet,
-        'menuName': AppLocalizations.of(context)!.settingsAboutTheApplication,
-        'title': AppLocalizations.of(context)!.settingsApplication,
-        'space': true,
-        'link': const AboutScreen()
-      },
-      {
-        'icon': HeroIcons.chatBubbleBottomCenterText,
-        'menuName': AppLocalizations.of(context)!.settingsReport,
-        'title': AppLocalizations.of(context)!.settingsHelp,
-        'space': true,
-        'link': const ReportScreen()
-      },
-    ];
     return Navbar(
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Column(
+          const Column(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               ListMenu(
                 icon: HeroIcons.user,
-                menuName:
-                    userProfile?.name ?? AppLocalizations.of(context)!.user,
-                subText:
-                    userProfile?.phone ?? AppLocalizations.of(context)!.mobile,
-                onTab: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ProfileDetailScreen()),
-                  );
-                },
+                menuName: "Fullname",
+                subText: "Mobile number",
               ),
             ],
           ),
@@ -136,22 +92,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         bold: item.containsKey('bold') ? item['bold'] : true,
                         space:
                             item.containsKey('space') ? item['space'] : false,
-                        onTab: item.containsKey('link')
-                            ? () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => item['link']),
-                                );
-                              }
-                            : null,
                       );
                     },
                   ),
                   Container(
                     padding: const EdgeInsets.all(20),
                     child: Button(
-                      text: AppLocalizations.of(context)!.logout,
+                      text: "ออกจากระบบ",
                       onPressed: () async {
                         try {
                           await FirebaseAuth.instance.signOut();
@@ -171,18 +118,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ],
       ),
       currentIndex: 2,
-      titleMenu: AppLocalizations.of(context)!.navBarProfile,
+      titleMenu: AppLocalizations.of(context)!.profile_title,
       backStep: false,
-      rightIcon: IconButton(
-        icon: const HeroIcon(HeroIcons.qrCode, size: 24),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const ProfileQRCodeScreen()),
-          );
-        },
-      ),
     );
   }
 }

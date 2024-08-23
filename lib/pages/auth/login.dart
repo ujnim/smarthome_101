@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:smart_home101/components/Button.dart';
 import 'package:smart_home101/components/Font.dart';
 import 'package:smart_home101/components/InputForm.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smart_home101/components/colors/AppColor.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -82,10 +82,10 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 10),
                     child: Font(
-                      text: AppLocalizations.of(context)!.loginSubmit,
+                      text: "เข้าสู่ระบบ",
                       fontSize: 30,
                     ),
                   ),
@@ -102,16 +102,15 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 children: [
                   InputForm(
-                    hintText: AppLocalizations.of(context)!.email,
+                    hintText: "Email",
                     controller: _emailController,
                     isRequired: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return AppLocalizations.of(context)!
-                            .emailValidationIsNull;
+                        return 'กรุณากรอกอีเมล';
                       }
                       if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                        return AppLocalizations.of(context)!.emailValidation;
+                        return 'กรุณากรอกอีเมลที่ถูกต้อง';
                       }
                       return null;
                     },
@@ -119,23 +118,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 15),
                   InputForm(
                     controller: _passwordController,
-                    isObscured: true,
-                    hintText: AppLocalizations.of(context)!.password,
+                    hintText: 'Password',
                     isRequired: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return AppLocalizations.of(context)!
-                            .passwordValidationIsNull;
+                        return 'กรุณากรอกรหัสผ่าน';
                       }
                       if (value.length < 6) {
-                        return AppLocalizations.of(context)!.emailValidation;
+                        return 'รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร';
                       }
                       return null;
                     },
                   ),
                   const SizedBox(height: 15),
                   Button(
-                    text: AppLocalizations.of(context)!.loginSubmit,
+                    text: "เข้าสู่ระบบ",
                     onPressed: isButtonDisabled ? null : _login,
                   ),
                 ],
