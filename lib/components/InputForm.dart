@@ -10,16 +10,22 @@ class InputForm extends StatelessWidget {
   final Color focusedBorderColor;
   final Color errorBorderColor;
   final bool isRequired;
+  final bool isEnabled;
+  final bool isObscured;
+  final String description;
 
   const InputForm({
     super.key,
     required this.controller,
     required this.hintText,
     this.isRequired = false,
+    this.isObscured = false,
+    this.isEnabled = true,
     this.validator,
     this.borderColor = AppColor.gray,
     this.focusedBorderColor = AppColor.primary,
     this.errorBorderColor = Colors.red,
+    this.description = "",
   });
 
   @override
@@ -33,15 +39,23 @@ class InputForm extends StatelessWidget {
               fontSize: 14,
               fontWeight: true,
             ),
-            if(isRequired)
-              const SizedBox(width: 5,),
-              const Font(text: "*", fontSize: 14, textColor: Colors.red,fontWeight: true,)
+            if (isRequired)
+              const Font(
+                text: "*",
+                fontSize: 14,
+                textColor: Colors.red,
+                fontWeight: true,
+              )
           ],
         ),
-        const SizedBox(height: 5,),
+        const SizedBox(
+          height: 5,
+        ),
         TextFormField(
+          obscureText: isObscured,
           controller: controller,
           validator: validator,
+          enabled: isEnabled,
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
@@ -68,6 +82,22 @@ class InputForm extends StatelessWidget {
             fillColor: Colors.white,
           ),
         ),
+        if (description.isNotEmpty) ...[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 5, bottom: 5),
+                child: Font(
+                  text: description,
+                  fontSize: 10,
+                  fontWeight: false,
+                  textColor: const Color(0xFF555555),
+                ),
+              ),
+            ],
+          )
+        ]
       ],
     );
   }

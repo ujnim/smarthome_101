@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_home101/components/AirThai.dart';
 import 'package:smart_home101/components/Navbar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -6,17 +7,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Navbar(
-      body: Container(
-        child: ElevatedButton(
-          onPressed: () {
-            print("Asd");
-          },
-          child: const Text("sasdadadaadasdadaddasdadadaadada"),
-        ),
+    return const Navbar(
+      body:  Column(
+        children: [
+          AirThai()
+        ],
       ),
       currentIndex: 0,
-      showAppBar: false
+      showAppBar: false,
     );
   }
 }
