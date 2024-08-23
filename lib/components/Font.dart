@@ -5,12 +5,17 @@ class Font extends StatelessWidget {
   final double fontSize;
   final Color textColor;
   final bool fontWeight;
+  final TextOverflow? overflow;
 
-  const Font({super.key, 
+
+  const Font({
+    super.key,
     required this.text,
     required this.fontSize,
     this.textColor = Colors.black,
     this.fontWeight = false,
+    this.overflow,
+
   });
 
   @override
@@ -18,9 +23,12 @@ class Font extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-          fontSize: fontSize,
-          fontWeight: fontWeight ? FontWeight.bold : FontWeight.normal,
-          color: textColor),
+        fontSize: fontSize,
+        fontWeight: fontWeight ? FontWeight.bold : FontWeight.normal,
+        color: textColor,
+      ),
+      softWrap: true,
+      overflow: overflow ?? TextOverflow.ellipsis
     );
   }
 }
